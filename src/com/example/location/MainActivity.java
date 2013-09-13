@@ -172,29 +172,7 @@ public class MainActivity extends FragmentActivity implements ConnectionCallback
 			return true;
 			// Google Play services was not available for some reason
 		} 
-		return false;
-		//		else {
-		//			// Get the error code
-		//			int errorCode = connectionResult.getErrorCode();
-		//			// Get the error dialog from Google Play services
-		//			Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-		//					errorCode,
-		//					this,
-		//					CONNECTION_FAILURE_RESOLUTION_REQUEST);
-		//
-		//			// If Google Play services can provide an error dialog
-		//			if (errorDialog != null) {
-		//				// Create a new DialogFragment for the error dialog
-		//				ErrorDialogFragment errorFragment =
-		//						new ErrorDialogFragment();
-		//				// Set the dialog in the DialogFragment
-		//				errorFragment.setDialog(errorDialog);
-		//				// Show the error dialog in the DialogFragment
-		//				errorFragment.show(
-		//						getSupportFragmentManager(),
-		//						"Geofence Detection");
-		//			}
-		//		}
+		return false;		
 	}
 
 
@@ -464,7 +442,7 @@ public class MainActivity extends FragmentActivity implements ConnectionCallback
 		}
 		// Turn off the in progress flag and disconnect the client
 		mInProgress = false;
-		mLocationClient.disconnect();
+		//mLocationClient.disconnect();
 	}
 
 
@@ -547,38 +525,38 @@ public class MainActivity extends FragmentActivity implements ConnectionCallback
 		 * a set of strings
 		 */
 		mUIGeofence1 = new SimpleGeofence(
-				"1",
-//				Double.valueOf(mLatitude1.getText().toString()),
-//				Double.valueOf(mLongitude1.getText().toString()),
-//				Float.valueOf(mRadius1.getText().toString()),
-//				GEOFENCE_EXPIRATION_TIME,
-//				// This geofence records only entry transitions
-//				Geofence.GEOFENCE_TRANSITION_ENTER);
-				
-				
-				
+				"1",	
 				Double.valueOf(latitude+""),
 				Double.valueOf(longitude+""),
-				Float.valueOf("5"),
-				GEOFENCE_EXPIRATION_TIME,
+				Float.valueOf("10"),
+				Geofence.NEVER_EXPIRE,
 				// This geofence records only entry transitions
-				Geofence.GEOFENCE_TRANSITION_ENTER);
-		// Store this flat version
+				Geofence.GEOFENCE_TRANSITION_ENTER |
+                Geofence.GEOFENCE_TRANSITION_EXIT);		
 		mGeofenceStorage.setGeofence("1", mUIGeofence1);
-		// Create another internal object. Set its ID to "2"
-//		mUIGeofence2 = new SimpleGeofence(
-//				"2",
-//				Double.valueOf(mLatitude2.getText().toString()),
-//				Double.valueOf(mLongitude2.getText().toString()),
-//				Float.valueOf(mRadius2.getText().toString()),
-//				GEOFENCE_EXPIRATION_TIME,
-//				// This geofence records both entry and exit transitions
-//				Geofence.GEOFENCE_TRANSITION_ENTER |
-//				Geofence.GEOFENCE_TRANSITION_EXIT);
-		// Store this flat version
-		//mGeofenceStorage.setGeofence("2", mUIGeofence2);
 		mGeofenceList.add(mUIGeofence1.toGeofence());
-//		mGeofenceList.add(mUIGeofence2.toGeofence());
+		mUIGeofence1 = new SimpleGeofence(
+				"2",	
+				Double.valueOf(latitude+""),
+				Double.valueOf(longitude+""),
+				Float.valueOf("40"),
+				Geofence.NEVER_EXPIRE,
+				// This geofence records only entry transitions
+				Geofence.GEOFENCE_TRANSITION_ENTER |
+                Geofence.GEOFENCE_TRANSITION_EXIT);		
+		mGeofenceStorage.setGeofence("2", mUIGeofence1);
+		mGeofenceList.add(mUIGeofence1.toGeofence());
+		mUIGeofence1 = new SimpleGeofence(
+				"3",	
+				Double.valueOf(latitude+""),
+				Double.valueOf(longitude+""),
+				Float.valueOf("90"),
+				Geofence.NEVER_EXPIRE,
+				// This geofence records only entry transitions
+				Geofence.GEOFENCE_TRANSITION_ENTER |
+                Geofence.GEOFENCE_TRANSITION_EXIT);		
+		mGeofenceStorage.setGeofence("3", mUIGeofence1);
+		mGeofenceList.add(mUIGeofence1.toGeofence());
 	}
 
 	/*
